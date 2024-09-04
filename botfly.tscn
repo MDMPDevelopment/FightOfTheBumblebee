@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyfkxre1p1bxa"]
+
+[ext_resource type="Texture2D" uid="uid://cub3nwv6i4lb7" path="res://Assets/Botfly/botfly.png" id="1_0wy7h"]
+[ext_resource type="Script" path="res://Scripts/botfly.gd" id="1_gjlc0"]
+[ext_resource type="Texture2D" uid="uid://ctj3alhfqhvj5" path="res://Assets/Botfly/botfly-folded.png" id="2_2j2gp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bxe1r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0wy7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2j2gp")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_335nt"]
+radius = 192.0
+height = 596.0
+
+[node name="Botfly" type="Area2D" groups=["Enemies"]]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_gjlc0")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_bxe1r")
+animation = &"fly"
+speed_scale = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("CapsuleShape2D_335nt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="BulletTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

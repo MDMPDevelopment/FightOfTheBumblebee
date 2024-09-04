@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bebd27cp2v3wb"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_rc2lt"]
+[ext_resource type="Script" path="res://Scripts/TopMarginContainer.gd" id="2_tyxky"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gn4g3"]
+font_size = 49
+
+[sub_resource type="LabelSettings" id="LabelSettings_o3vnu"]
+font_size = 39
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rc2lt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 71.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+script = ExtResource("2_tyxky")
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_gn4g3")
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -102.0
+offset_right = 228.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+text = "Fight of the Bumblebee"
+label_settings = SubResource("LabelSettings_o3vnu")
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -24.0
+offset_right = 28.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "START"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
